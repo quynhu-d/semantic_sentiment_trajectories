@@ -43,7 +43,7 @@ def prepare_russian_text(input_file, output_file):
       
     prepared_text = ''
     prev_num = False
-    for token in tqdm(doc.tokens, desc='Text preprocessing...'):
+    for token in tqdm(doc.tokens, desc='Text preprocessing...', leave=False):
       
         if token.pos == 'NUM' and not token.text.isdigit():
             if not prev_num:
@@ -106,7 +106,7 @@ def prepare_english_text(input_file, output_file):
     #(proper nouns, pronouns and numericals)
     pos_dict = {'PROPN': 'person1', 'PRON': 'pron1', 'NUM': 'ordinal1'}   
     fin  = open(input_file, 'r', encoding='utf-8')
-    with open(output_file, 'w') as prepared_text:
+    with open(output_file, 'w', encoding='utf-8') as prepared_text:
       for line in fin:
         #decontract text
         preprocessed_text = decontracted(line.strip())
